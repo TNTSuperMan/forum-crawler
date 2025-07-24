@@ -61,7 +61,7 @@ if(!f.ok){
     console.error(`Failed to fetch: ${f.status} ${f.statusText}`);
 }else{
     const dom = new JSDOM(await f.text());
-    const title = dom.window.document.querySelector(".linkst ul li:nth-last-child(1)")!.childNodes[0]!.textContent!.substring(3);
+    const title = dom.window.document.querySelector(".linkst ul li:nth-last-child(1)")!.childNodes[0]!.textContent!.substring(2);
     console.log(title);
 
     const max = parseInt(dom.window.document.querySelector(".pagination a:nth-last-child(2)")!.textContent);
