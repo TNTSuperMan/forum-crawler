@@ -1,8 +1,8 @@
-# scratch-bbdb
+# forum-crawler
 非公式でScratchチームとは何も関係ありませんよ。
 
 ## なんこれ
-ディスカッションフォーラムのクローラーで、これやったら検索できる
+Scratchのディスカッションフォーラムのクローラーで、これやったら検索できる
 
 ## スタック(?)
 Bun+SQLite+Zod+JSDOM
