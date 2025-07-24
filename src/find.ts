@@ -34,9 +34,9 @@ else {
     const find_end = Bun.nanoseconds();
 
     result.forEach(e=>{
-        console.error(`
-${topics.get(e.topic)!}#${e.hash} @${e.user} ( https://scratch.mit.edu/discuss/post/${e.id}/ )`);
-        console.log(e.content);
+        console.log(`${topics.get(e.topic)!}#${e.hash} @${e.user} ( https://scratch.mit.edu/discuss/post/${e.id}/ )
+${e.content}
+`);
     })
 
     console.log(`find: ${find_end-find_start}ns`);
