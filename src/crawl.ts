@@ -40,11 +40,11 @@ fetchqueue.process();
 async function crawlPosts(topic: number, i: number){
     const res = await fetchqueue.enqueue(`https://scratch.mit.edu/discuss/topic/${topic}/?page=${i}`);
 
-    console.timeEnd(`${topic}-${i} dom`);
+    console.timeEnd(`dom ${i}`);
     const dom = new JSDOM(await res.text());
-    console.timeEnd(`${topic}-${i} dom`);
+    console.timeEnd(`dom ${i}`);
 
-    console.time(`${topic}-${i} contents`);
+    console.time(`contents ${i}`);
     dom.window.document.querySelectorAll(".blockpost.roweven.firstpost").values().toArray().forEach(el=>
         database.query("INSERT OR IGNORE INTO posts (id, topic, hash, user, content) VALUES (?,?,?,?,?)").all(
             parseInt(/\/(\d+)\/$/.exec(el.querySelector(".box-head a")?.getAttribute("href")!)![1]!),
@@ -52,7 +52,7 @@ async function crawlPosts(topic: number, i: number){
             parseInt(el.querySelector(".conr")!.textContent.substring(1)),
             el.querySelector(".username")!.textContent,
             el.querySelector(".post_body_html")!.textContent));
-    console.timeEnd(`${topic}-${i} contents`);
+    console.timeEnd(`contents ${i}`);
 }
 const topic = parseInt(process.argv[2]??"");
 const f = await fetchqueue.enqueue(`https://scratch.mit.edu/discuss/topic/${topic}/`);
