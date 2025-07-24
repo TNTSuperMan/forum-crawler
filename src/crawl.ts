@@ -37,7 +37,15 @@ const fetchqueue = new FetchQueue;
 
 fetchqueue.process();
 
+const searchSQL = database.prepare("SELECT * FROM posts WHERE topic = ? AND hash = ?");
+
 async function crawlPosts(topic: number, i: number){
+    // 20ページ単位であることを元に計算 最後の1pはわざとクロールする仕組み
+    if(searchSQL.get(topic, 20 * i + 1)){
+        console.log(`already crawled ${i}`);
+        return;
+    }
+
     const res = await fetchqueue.enqueue(`https://scratch.mit.edu/discuss/topic/${topic}/?page=${i}`);
 
     console.timeEnd(`dom ${i}`);
